@@ -1,0 +1,34 @@
+  
+with all_values as (
+
+    select
+        shipmode as value_field,
+        count(*) as n_records
+
+    from analytics.dbt_dsanchez.raw_orders
+    group by shipmode
+
+)
+
+select *
+from all_values
+where value_field not in (
+    'First Class','Same Day','Second Class','Standard Class'
+)
+
+
+
+select
+    orderid as unique_field,
+    count(*) as n_records
+
+from analytics.dbt_dsanchez.raw_orders
+where orderid is not null
+group by orderid
+having count(*) > 1
+
+
+
+  
+  
+      
